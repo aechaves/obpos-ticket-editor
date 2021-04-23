@@ -18,7 +18,7 @@ export default class Editor extends Component<EditorProps, EditorState> {
     const { className, value, onChange } = this.props;
     return (
       <div className={className}>
-        <textarea className='w-full h-full bg-yellow-300' value={value} onChange={onChange} />
+        <textarea className='w-full h-full bg-gray-100 px-2 shadow-sm block focus:outline-none border-gray-300 rounded-md' value={value} onChange={onChange} />
       </div>
     )
   }

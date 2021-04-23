@@ -5,8 +5,8 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import ReactPanZoom from "@ajainarayanan/react-pan-zoom";
 import { barcode, image, line, output, text, ticket } from './ticket'
 import OB from '../helpers/OB'
-import './Display.css'
 import { data as ticketExamples } from '../ticket-examples/ticket_example_1.json'
+import ZoomController from './ZoomController';
 
 interface DisplayProps {
   value: string
@@ -56,7 +56,7 @@ export default class Display extends Component<DisplayProps, DisplayState> {
     const { zoom } = this.state
     return (
       <div className={className}>
-        <div className='flex flex-grow justify-center overflow-scroll bg-green-300'>
+        <div className='flex flex-grow justify-center overflow-scroll bg-gray-50'>
           <ReactPanZoom zoom={zoom}>
             <JsxParser
               showWarnings
@@ -66,10 +66,8 @@ export default class Display extends Component<DisplayProps, DisplayState> {
           </ReactPanZoom>
         </div>
         <div className='absolute z-20 bottom-6'>
-          <div className='flex justify-center items-center bg-purple-300'>
-            <button onClick={this.zoomIn}>+</button>
-            <button onClick={this.zoomOut}>-</button>
-            <button onClick={this.resetZoom}>x</button>
+          <div className='flex justify-center items-center'>
+            <ZoomController zoomIn={this.zoomIn} zoomOut={this.zoomOut} resetZoom={this.resetZoom} />
           </div>
         </div>
       </div>
