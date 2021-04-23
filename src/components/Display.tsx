@@ -56,7 +56,7 @@ export default class Display extends Component<DisplayProps, DisplayState> {
     const { zoom } = this.state
     return (
       <div className={className}>
-        <div className='pl-5 overflow-scroll bg-green-300'>
+        <div className='flex flex-grow justify-center overflow-scroll bg-green-300'>
           <ReactPanZoom zoom={zoom}>
             <JsxParser
               showWarnings
@@ -65,10 +65,12 @@ export default class Display extends Component<DisplayProps, DisplayState> {
             />
           </ReactPanZoom>
         </div>
-        <div className='absolute z-10 bg-purple-300'>
-          <button onClick={this.zoomIn}>+</button>
-          <button onClick={this.zoomOut}>-</button>
-          <button onClick={this.resetZoom}>x</button>
+        <div className='absolute z-20 bottom-6'>
+          <div className='flex justify-center items-center bg-purple-300'>
+            <button onClick={this.zoomIn}>+</button>
+            <button onClick={this.zoomOut}>-</button>
+            <button onClick={this.resetZoom}>x</button>
+          </div>
         </div>
       </div>
     )

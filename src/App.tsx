@@ -21,7 +21,7 @@ function App() {
         <button onClick={loadExample}>Load Example</button>
       </div>
       <Editor className='flex flex-grow h-screen w-1/2' value={editorText} onChange={onChangeEditorText} />
-      <Display className='flex flex-grow flex-col h-screen w-1/2' value={editorText} />
+      <Display className='flex flex-grow justify-center h-screen w-1/2' value={editorText} />
     </div>
   )
 }
