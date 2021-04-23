@@ -16,12 +16,12 @@ function App() {
   }
 
   return (
-    <div className='splitContainer'>
+    <div className='flex justify-between items-stretch'>
       <div>
         <button onClick={loadExample}>Load Example</button>
       </div>
-      <Editor className='splitItemLeft' value={editorText} onChange={onChangeEditorText} />
-      <Display className='splitItemRight' value={editorText} />
+      <Editor className='flex flex-grow h-screen w-1/2' value={editorText} onChange={onChangeEditorText} />
+      <Display className='flex flex-grow flex-col h-screen w-1/2' value={editorText} />
     </div>
   )
 }

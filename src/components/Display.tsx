@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import JsxParser from 'react-jsx-parser'
 import { template as compile } from 'underscore'
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import ReactPanZoom from "@ajainarayanan/react-pan-zoom";
 import { barcode, image, line, output, text, ticket } from './ticket'
 import OB from '../helpers/OB'
 import './Display.css'
@@ -11,34 +13,62 @@ interface DisplayProps {
   className: string
 }
 
-interface DisplayState { }
+interface DisplayState {
+  zoom: number
+}
 
 export default class Display extends Component<DisplayProps, DisplayState> {
 
   constructor(props: DisplayProps) {
     super(props);
+    this.state = {
+      zoom: 1
+    }
   }
 
   compileTemplate(_template: string): string {
     let template = _template.replace('<?xml version="1.0" encoding="UTF-8"?>', '')
     let compiledTemplate = compile(template)
-    console.log(ticketExamples[0].documentNo);
 
     let result = compiledTemplate({ name: 'test', OB, ticket: ticketExamples[0] })
 
     return result
   }
 
+  zoomIn = () => {
+    this.setState((({ zoom }) => {
+      this.setState({ zoom: zoom + 0.2 })
+    }))
+  }
+
+  zoomOut = () => {
+    this.setState((({ zoom }) => {
+      this.setState({ zoom: zoom - 0.2 })
+    }))
+  }
+
+  resetZoom = () => {
+    this.setState({ zoom: 1 })
+  }
+
   render() {
-    const { className, value } = this.props;
+    const { className, value } = this.props
+    const { zoom } = this.state
     return (
       <div className={className}>
-        <div className='displayContent'>
-          <JsxParser
-            showWarnings
-            components={{ ticket, output, line, text, image, barcode }}
-            jsx={this.compileTemplate(value)}
-          />
+        <div className='pl-5 overflow-scroll bg-green-300'>
+          <ReactPanZoom zoom={zoom}>
+            <JsxParser
+              showWarnings
+              components={{ ticket, output, line, text, image, barcode }}
+              jsx={this.compileTemplate(value)}
+            />
+          </ReactPanZoom>
+        </div>
+        <div className='absolute z-10 bg-purple-300'>
+          <button onClick={this.zoomIn}>+</button>
+          <button onClick={this.zoomOut}>-</button>
+          <button onClick={this.resetZoom}>x</button>
         </div>
       </div>
     )
