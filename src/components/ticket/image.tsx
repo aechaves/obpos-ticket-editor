@@ -14,7 +14,6 @@ export type ImageProps = {
 
 const image: React.FunctionComponent<ImageProps> = (props) => {
   // TODO handle type?
-  // TODO render a placeholder
   return (
     <div>
       <img className='image' src={ticketImage} alt='ticket-image' />
