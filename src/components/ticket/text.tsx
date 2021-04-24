@@ -9,6 +9,24 @@ export type TextProps = {
   children?: JSX.Element
 }
 
+/**
+ * Is defined inside a line element. Is used to print a string into a ticket.
+ * @param props 
+ * size: Defines the font size used, by Default is 0, the avalable values are: \
+ * 0: Normal size \
+ * 1: Double height \
+ * 2: Double width \
+ * 3: Double height, double width \
+ *  \
+ * align: Defines the aligment of the text string. The avalable values are: \
+ * left: Align text to the left \
+ * right: Align text to the right \
+ * center: Center the text.
+ * 
+ * length: Defines the length in characters. Is used to fit the text strings. \
+ * bold: Defines if the text is bold or not. By default is false. \
+ * underline: Defines if the text is underlined or not. By default is false.
+ */
 const text: React.FC<TextProps> = ({ size, align, bold, underline, length, children }) => {
   /* 
   text attribute, size: Defines the font size used, by Default is 0, the avalable values are:
