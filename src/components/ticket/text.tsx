@@ -9,7 +9,7 @@ export type TextProps = {
   children?: JSX.Element
 }
 
-export default function text({ size, align, bold, underline, length, children }: TextProps) {
+const text: React.FC<TextProps> = ({ size, align, bold, underline, length, children }) => {
   /* 
   text attribute, size: Defines the font size used, by Default is 0, the avalable values are:
     0: Normal size
@@ -43,4 +43,5 @@ export default function text({ size, align, bold, underline, length, children }:
   )
 }
 
+export default text
 
