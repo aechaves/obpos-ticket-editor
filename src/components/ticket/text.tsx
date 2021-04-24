@@ -6,10 +6,10 @@ export type TextProps = {
   length?: string
   bold?: boolean
   underline?: boolean
+  children?: JSX.Element
 }
 
-const text: React.FunctionComponent<TextProps> = ({ size, align, bold, underline, length, children }) => {
-  // TODO size:
+export default function text({ size, align, bold, underline, length, children }: TextProps) {
   /* 
   text attribute, size: Defines the font size used, by Default is 0, the avalable values are:
     0: Normal size
@@ -17,17 +17,30 @@ const text: React.FunctionComponent<TextProps> = ({ size, align, bold, underline
     2: Double width
     3: Double height, double width  
   */
+  function getTransform(size: string) {
+    switch (size) {
+      case '0':
+        return 'transform-none'
+      case '1':
+        return 'transform scale-y-150'
+      case '2':
+        return 'transform scale-x-150'
+      case '3':
+        return 'transform scale-150'
+      default:
+        return 'transform-none'
+    }
+  }
 
-  // TODO length defines the string max size, use a string type children prop
+  // length defines the text max size
+  const maxLength: number = length ? parseInt(length) : children?.props.children.length
+  const content: string = children ? children?.props.children : ''
+  const transformClass = getTransform(size || '0')
   return (
-    <p style={{ textAlign: align, fontWeight: bold ? 'bold' : 'normal', textDecoration: underline ? 'underline' : 'none' }}>
-      {children}
+    <p className={transformClass} style={{ textAlign: align, fontWeight: bold ? 'bold' : 'normal', textDecoration: underline ? 'underline' : 'none' }}>
+      {content.trim().substring(0, maxLength)}
     </p>
   )
 }
 
-text.propTypes = {
 
-}
-
-export default text
