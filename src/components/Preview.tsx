@@ -7,6 +7,7 @@ import { barcode, display, image, line, output, text, ticket } from './ticket'
 import OB from '../helpers/OB'
 import { data as ticketExamples } from '../ticket-examples/ticket_example_1.json'
 import ZoomController from './ZoomController';
+import PreviewError from './PreviewError';
 
 interface PreviewProps {
   value: string
@@ -15,6 +16,7 @@ interface PreviewProps {
 
 interface PreviewState {
   zoom: number
+  error?: Error
 }
 
 export default class Preview extends Component<PreviewProps, PreviewState> {
@@ -51,19 +53,29 @@ export default class Preview extends Component<PreviewProps, PreviewState> {
     this.setState({ zoom: 1 })
   }
 
+  onJSXError = (error: Error) => {
+    this.setState({ error })
+  }
+
   render() {
     const { className, value } = this.props
-    const { zoom } = this.state
+    const { zoom, error } = this.state
     return (
       <div className={className}>
         <div className='flex flex-grow justify-center overflow-scroll bg-gray-50'>
-          <ReactPanZoom zoom={zoom}>
-            <JsxParser
-              showWarnings
-              components={{ ticket, output, line, text, image, barcode, display }}
-              jsx={this.compileTemplate(value)}
-            />
-          </ReactPanZoom>
+          {error ?
+            <PreviewError title={error.name} message={error.message} />
+            :
+            <ReactPanZoom zoom={zoom}>
+              <JsxParser
+                showWarnings
+                componentsOnly
+                components={{ ticket, output, line, text, image, barcode, display }}
+                jsx={this.compileTemplate(value)}
+                onError={this.onJSXError}
+              />
+            </ReactPanZoom>
+          }
         </div>
         <div className='absolute z-20 bottom-6'>
           <div className='flex justify-center items-center'>

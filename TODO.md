@@ -4,7 +4,6 @@
 * Ignore the opendrawer tag ( no op component?)
 * Include common labels used by getLabel()
 * Render tickets in separate canvas and allow to save a pdf via the print dialog
-* Show errors via the JSXParser component onError or renderError (use Tailwind UI notification styles)
 * Improve textarea editing (remove autocorrect, autocomplete, syntaxhighlight, etc)
 * Improve rendering of some components
 * Deploy a webapp
