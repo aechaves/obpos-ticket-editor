@@ -25,7 +25,7 @@ const image: React.FunctionComponent<ImageProps> = (props) => {
   // TODO handle type?
   return (
     <div>
-      <img className='image' src={ticketImage} alt='ticket-image' />
+      <img className='block m-auto' src={ticketImage} alt='ticket-image' />
     </div>
   )
 }
