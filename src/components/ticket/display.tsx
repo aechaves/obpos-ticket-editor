@@ -1,9 +1,11 @@
 import React from 'react'
-import line from './line'
+import { LineProps } from './line'
+
+type LineChildren = React.FC<LineProps> | React.FC<LineProps>[]
 
 export type DisplayProps = {
   animation?: 'none' | 'flyer' | 'scroll' | 'blink' | 'curtain'
-  children?: typeof line
+  children?: LineChildren
 }
 
 /**
