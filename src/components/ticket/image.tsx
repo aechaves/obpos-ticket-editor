@@ -1,6 +1,5 @@
 import React from 'react'
 import ticketImage from '../../ticket-image.png'
-import './ticketStyles.css'
 
 export type ImageProps = {
   type?: 'default' | 'url' | 'file' | 'classpath'
