@@ -62,7 +62,7 @@ export default class Preview extends Component<PreviewProps, PreviewState> {
     const { zoom, error } = this.state
     return (
       <div className={className}>
-        <div className='flex flex-grow justify-center overflow-scroll bg-gray-50'>
+        <div className='flex flex-grow justify-center overflow-scroll bg-gray-50 print:absolute print:inset-0 print:overflow-visible'>
           {error ?
             <PreviewError title={error.name} message={error.message} />
             :
@@ -77,7 +77,7 @@ export default class Preview extends Component<PreviewProps, PreviewState> {
             </ReactPanZoom>
           }
         </div>
-        <div className='absolute z-20 bottom-6'>
+        <div className='absolute z-20 bottom-6 print:hidden'>
           <div className='flex justify-center items-center'>
             <ZoomController zoomIn={this.zoomIn} zoomOut={this.zoomOut} resetZoom={this.resetZoom} />
           </div>

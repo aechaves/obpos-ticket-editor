@@ -21,7 +21,7 @@ function App() {
       <Sidebar>
         <SidebarButton onClick={loadExample}>Load Example</SidebarButton>
       </Sidebar>
-      <Editor className='flex flex-grow h-screen w-1/2' defaultLanguage='xml' theme='vs-dark' value={editorText} onChange={onChangeEditorText} />
+      <Editor className='flex flex-grow h-screen w-1/2 print:hidden' defaultLanguage='xml' theme='vs-dark' value={editorText} onChange={onChangeEditorText} />
       <Preview className='flex flex-grow justify-center h-screen w-1/2' value={editorText} />
     </div>
   )
