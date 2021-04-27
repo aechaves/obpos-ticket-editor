@@ -5,6 +5,7 @@ export type PreviewControllerProps = {
   zoomIn: () => void
   zoomOut: () => void
   resetZoom: () => void
+  print: () => void
 }
 
 const PreviewController: React.FunctionComponent<PreviewControllerProps> = (props) => {
@@ -30,7 +31,7 @@ const PreviewController: React.FunctionComponent<PreviewControllerProps> = (prop
         <XCircleIcon className="h-5 w-5" aria-hidden="true" />
       </button>
       <button
-        onClick={window.print}
+        onClick={props.print}
         className="relative inline-flex items-center px-4  py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
       >
         <PrinterIcon className="h-5 w-5" aria-hidden="true" />

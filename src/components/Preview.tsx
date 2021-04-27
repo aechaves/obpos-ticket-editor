@@ -57,6 +57,10 @@ export default class Preview extends Component<PreviewProps, PreviewState> {
     this.setState({ error })
   }
 
+  print = () => {
+    this.setState({ zoom: 1 }, () => window.print())
+  }
+
   render() {
     const { className, value } = this.props
     const { zoom, error } = this.state
@@ -79,7 +83,7 @@ export default class Preview extends Component<PreviewProps, PreviewState> {
         </div>
         <div className='absolute z-20 bottom-6 print:hidden'>
           <div className='flex justify-center items-center'>
-            <PreviewController zoomIn={this.zoomIn} zoomOut={this.zoomOut} resetZoom={this.resetZoom} />
+            <PreviewController zoomIn={this.zoomIn} zoomOut={this.zoomOut} resetZoom={this.resetZoom} print={this.print} />
           </div>
         </div>
       </div>
