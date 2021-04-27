@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Display from './components/Display'
+import Preview from './components/Preview'
 import Sidebar from './components/sidebar/Sidebar'
 import SidebarButton from './components/sidebar/SidebarButton'
 import { data as ticketStructure } from './ticket-examples/ticket_structure_example.json'
@@ -22,7 +22,7 @@ function App() {
         <SidebarButton onClick={loadExample}>Load Example</SidebarButton>
       </Sidebar>
       <Editor className='flex flex-grow h-screen w-1/2' defaultLanguage='xml' theme='vs-dark' value={editorText} onChange={onChangeEditorText} />
-      <Display className='flex flex-grow justify-center h-screen w-1/2' value={editorText} />
+      <Preview className='flex flex-grow justify-center h-screen w-1/2' value={editorText} />
     </div>
   )
 }

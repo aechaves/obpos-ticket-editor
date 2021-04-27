@@ -3,23 +3,23 @@ import JsxParser from 'react-jsx-parser'
 import { template as compile } from 'underscore'
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import ReactPanZoom from "@ajainarayanan/react-pan-zoom";
-import { barcode, image, line, output, text, ticket } from './ticket'
+import { barcode, display, image, line, output, text, ticket } from './ticket'
 import OB from '../helpers/OB'
 import { data as ticketExamples } from '../ticket-examples/ticket_example_1.json'
 import ZoomController from './ZoomController';
 
-interface DisplayProps {
+interface PreviewProps {
   value: string
   className: string
 }
 
-interface DisplayState {
+interface PreviewState {
   zoom: number
 }
 
-export default class Display extends Component<DisplayProps, DisplayState> {
+export default class Preview extends Component<PreviewProps, PreviewState> {
 
-  constructor(props: DisplayProps) {
+  constructor(props: PreviewProps) {
     super(props);
     this.state = {
       zoom: 1
@@ -60,7 +60,7 @@ export default class Display extends Component<DisplayProps, DisplayState> {
           <ReactPanZoom zoom={zoom}>
             <JsxParser
               showWarnings
-              components={{ ticket, output, line, text, image, barcode }}
+              components={{ ticket, output, line, text, image, barcode, display }}
               jsx={this.compileTemplate(value)}
             />
           </ReactPanZoom>
