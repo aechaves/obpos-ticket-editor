@@ -6,7 +6,7 @@ import ReactPanZoom from "@ajainarayanan/react-pan-zoom";
 import { barcode, display, image, line, output, text, ticket } from './ticket'
 import OB from '../helpers/OB'
 import { data as ticketExamples } from '../ticket-examples/ticket_example_1.json'
-import ZoomController from './ZoomController';
+import PreviewController from './PreviewController';
 import PreviewError from './PreviewError';
 
 interface PreviewProps {
@@ -79,7 +79,7 @@ export default class Preview extends Component<PreviewProps, PreviewState> {
         </div>
         <div className='absolute z-20 bottom-6 print:hidden'>
           <div className='flex justify-center items-center'>
-            <ZoomController zoomIn={this.zoomIn} zoomOut={this.zoomOut} resetZoom={this.resetZoom} />
+            <PreviewController zoomIn={this.zoomIn} zoomOut={this.zoomOut} resetZoom={this.resetZoom} />
           </div>
         </div>
       </div>
