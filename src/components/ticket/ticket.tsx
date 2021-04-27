@@ -10,7 +10,7 @@ export type TicketProps = {
  */
 const ticket: React.FunctionComponent<TicketProps> = (props) => {
   return (
-    <div className='bg-white border-black border p-5'>
+    <div className='bg-white border-black border p-5 mb-2'>
       {props.children}
     </div>
   )

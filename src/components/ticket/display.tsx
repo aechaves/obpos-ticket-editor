@@ -1,7 +1,9 @@
 import React from 'react'
+import line from './line'
 
 export type DisplayProps = {
-  animation: 'none' | 'flyer' | 'scroll' | 'blink' | 'curtain'
+  animation?: 'none' | 'flyer' | 'scroll' | 'blink' | 'curtain'
+  children?: typeof line
 }
 
 /**
@@ -13,9 +15,13 @@ export type DisplayProps = {
  * - blink: Text blinks continuously.
  * - curtain: Text appears behind a virtual curtain.
  */
-const display: React.FC<DisplayProps> = ({ animation }) => {
-  // TODO support the display tag fully
-  return null
+const display: React.FC<DisplayProps> = ({ animation, children }) => {
+  // TODO support the animation prop
+  return (
+    <div className='bg-black text-white border-4 border-gray-400 mt-2 text-center'>
+      {children}
+    </div>
+  )
 }
 
 export default display

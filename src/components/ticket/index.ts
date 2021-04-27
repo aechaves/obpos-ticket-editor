@@ -4,6 +4,7 @@ import line from './line'
 import text from './text'
 import image from './image'
 import barcode from './barcode'
+import display from './display'
 
 export {
   ticket,
@@ -12,4 +13,5 @@ export {
   text,
   image,
   barcode,
+  display,
 }
