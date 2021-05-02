@@ -7,6 +7,7 @@ export type UserConfiguration = {
   monacoThemeLight: boolean
   monacoMinimap: boolean
   monacoLineNumbers: boolean
+  [key: string]: boolean | any
 }
 
 type UserContext = {
@@ -23,9 +24,25 @@ const defaultConfiguration: UserConfiguration = {
   monacoLineNumbers: true,
 }
 
+const loadFromStorage = (defaultConfiguration: UserConfiguration) => {
+  const config: UserConfiguration = defaultConfiguration
+
+  Object.keys(defaultConfiguration).forEach(key => {
+    config[key] = localStorage.getItem(key) || config[key]
+  });
+
+  return config
+}
+
+const saveToStorage = (configuration: UserConfiguration) => {
+  Object.keys(configuration).forEach(key => {
+    localStorage.setItem(key, configuration[key])
+  });
+}
+
 const userContext = React.createContext<UserContext>({
   configuration: defaultConfiguration,
   updateConfiguration: () => { }
 });
 
-export { userContext, defaultConfiguration };
+export { userContext, defaultConfiguration, loadFromStorage, saveToStorage };

@@ -6,13 +6,13 @@ import { data as ticketStructure } from './ticket-examples/ticket_structure_exam
 import Editor from '@monaco-editor/react'
 import Configuration from './components/configuration/Configuration'
 import { DocumentTextIcon, CogIcon } from '@heroicons/react/solid'
-import { UserConfiguration, userContext, defaultConfiguration } from './helpers/userContext';
+import { UserConfiguration, userContext, defaultConfiguration, loadFromStorage, saveToStorage } from './helpers/userContext';
 
 function App() {
   const [editorText, setEditorText] = useState('')
   const [showConfigModal, setShowConfigModal] = useState(false)
   // TODO retrieve from local storage
-  const [userConfiguration, setUserConfiguration] = useState(defaultConfiguration)
+  const [userConfiguration, setUserConfiguration] = useState(loadFromStorage(defaultConfiguration))
 
   const onChangeEditorText = (value: string | undefined) => {
     setEditorText(value || '')
@@ -27,11 +27,7 @@ function App() {
   }
 
   const saveConfig = () => {
-    // todo save config in localStorage
-    setShowConfigModal(false)
-  }
-
-  const discardConfig = () => {
+    saveToStorage(userConfiguration)
     setShowConfigModal(false)
   }
 
