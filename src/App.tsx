@@ -11,7 +11,6 @@ import { UserConfiguration, userContext, defaultConfiguration, loadFromStorage, 
 function App() {
   const [editorText, setEditorText] = useState('')
   const [showConfigModal, setShowConfigModal] = useState(false)
-  // TODO retrieve from local storage
   const [userConfiguration, setUserConfiguration] = useState(loadFromStorage(defaultConfiguration))
 
   const onChangeEditorText = (value: string | undefined) => {
