@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useReducer, useState } from 'react'
 import Preview from './components/Preview'
 import Sidebar from './components/sidebar/Sidebar'
 import SidebarButton from './components/sidebar/SidebarButton'
@@ -6,12 +6,17 @@ import { data as ticketStructure } from './ticket-examples/ticket_structure_exam
 import Editor from '@monaco-editor/react'
 import Configuration from './components/configuration/Configuration'
 import { DocumentTextIcon, CogIcon } from '@heroicons/react/solid'
-import { UserConfiguration, userContext, defaultConfiguration, loadFromStorage, saveToStorage } from './helpers/userContext';
+import { UserConfiguration, ConfigurationDispatch, userContext, defaultConfiguration, loadFromStorage, saveToStorage } from './helpers/userContext';
 
 function App() {
   const [editorText, setEditorText] = useState('')
   const [showConfigModal, setShowConfigModal] = useState(false)
-  const [userConfiguration, setUserConfiguration] = useState(loadFromStorage(defaultConfiguration))
+
+  const updateConfiguration = (previous: UserConfiguration, action: ConfigurationDispatch) => {
+    return { ...previous, [action.property]: action.value }
+  }
+
+  const [userConfiguration, dispatchUserConfiguration] = useReducer(updateConfiguration, defaultConfiguration, loadFromStorage)
 
   const onChangeEditorText = (value: string | undefined) => {
     setEditorText(value || '')
@@ -30,12 +35,8 @@ function App() {
     setShowConfigModal(false)
   }
 
-  const updateConfiguration = (property: keyof UserConfiguration, value: UserConfiguration[keyof UserConfiguration]) => {
-    setUserConfiguration({ ...userConfiguration, [property]: value })
-  }
-
   return (
-    <userContext.Provider value={{ configuration: userConfiguration, updateConfiguration }}>
+    <userContext.Provider value={{ configuration: userConfiguration, dispatchUserConfiguration }}>
       <div className='flex justify-between items-stretch'>
         <Sidebar>
           <SidebarButton onClick={loadExample} label='Load Example'>

@@ -10,9 +10,14 @@ export type UserConfiguration = {
   [key: string]: boolean | any
 }
 
+export type ConfigurationDispatch = {
+  property: keyof UserConfiguration
+  value: UserConfiguration[keyof UserConfiguration]
+}
+
 type UserContext = {
   configuration: UserConfiguration
-  updateConfiguration: (property: keyof UserConfiguration, value: UserConfiguration[keyof UserConfiguration]) => void
+  dispatchUserConfiguration: React.Dispatch<ConfigurationDispatch>
 }
 
 const defaultConfiguration: UserConfiguration = {
@@ -24,25 +29,25 @@ const defaultConfiguration: UserConfiguration = {
   monacoLineNumbers: true,
 }
 
-const loadFromStorage = (defaultConfiguration: UserConfiguration) => {
-  const config: UserConfiguration = defaultConfiguration
+const loadFromStorage = () => {
+  let config: UserConfiguration = defaultConfiguration
 
-  Object.keys(defaultConfiguration).forEach(key => {
-    config[key] = localStorage.getItem(key) || config[key]
-  });
+  try {
+    config = JSON.parse(localStorage.getItem('userConfig') || '')
+  } catch (error) {
+    console.error(error)
+  }
 
   return config
 }
 
 const saveToStorage = (configuration: UserConfiguration) => {
-  Object.keys(configuration).forEach(key => {
-    localStorage.setItem(key, configuration[key])
-  });
+  localStorage.setItem('userConfig', JSON.stringify(configuration))
 }
 
 const userContext = React.createContext<UserContext>({
   configuration: defaultConfiguration,
-  updateConfiguration: () => { }
+  dispatchUserConfiguration: () => { }
 });
 
 export { userContext, defaultConfiguration, loadFromStorage, saveToStorage };

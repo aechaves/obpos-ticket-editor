@@ -16,7 +16,7 @@ const Configuration: React.FC<ConfigurationProps> = ({ open, onDismiss }) => {
   return (
     <userContext.Consumer>
       {
-        ({ configuration, updateConfiguration }) => {
+        ({ configuration, dispatchUserConfiguration }) => {
           return (
             <Transition.Root show={!!open} as={Fragment}>
               <Dialog
@@ -85,7 +85,7 @@ const Configuration: React.FC<ConfigurationProps> = ({ open, onDismiss }) => {
                                       <Toggle
                                         label={`Theme: ${configuration.monacoThemeLight ? 'Light' : 'Dark'}`}
                                         enabled={configuration.monacoThemeLight}
-                                        onChange={() => updateConfiguration('monacoThemeLight', !configuration.monacoThemeLight)}
+                                        onChange={() => dispatchUserConfiguration({ property: 'monacoThemeLight', value: !configuration.monacoThemeLight })}
                                       />
                                     </div>
                                     {/* Minimap enable/disable */}
@@ -93,7 +93,7 @@ const Configuration: React.FC<ConfigurationProps> = ({ open, onDismiss }) => {
                                       <Toggle
                                         label='Enable Minimap'
                                         enabled={configuration.monacoMinimap}
-                                        onChange={() => updateConfiguration('monacoMinimap', !configuration.monacoMinimap)}
+                                        onChange={() => dispatchUserConfiguration({ property: 'monacoMinimap', value: !configuration.monacoMinimap })}
                                       />
                                     </div>
                                     {/* lineNumbers enable/disable */}
@@ -101,7 +101,7 @@ const Configuration: React.FC<ConfigurationProps> = ({ open, onDismiss }) => {
                                       <Toggle
                                         label='Enable Line Numbers'
                                         enabled={configuration.monacoLineNumbers}
-                                        onChange={() => updateConfiguration('monacoLineNumbers', !configuration.monacoLineNumbers)}
+                                        onChange={() => dispatchUserConfiguration({ property: 'monacoLineNumbers', value: !configuration.monacoLineNumbers })}
                                       />
                                     </div>
                                     {/* Message Labels */}
