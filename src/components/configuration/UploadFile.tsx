@@ -5,9 +5,11 @@ export type UploadFileProps = {
   subtitle?: string
   hint?: string
   uploadHint?: string
+  onChangeInput?: React.ChangeEventHandler<HTMLInputElement>
 }
 
-const UploadFile: React.FC<UploadFileProps> = ({ title, subtitle, hint, uploadHint }) => {
+const UploadFile: React.FC<UploadFileProps> = ({ title, subtitle, hint, uploadHint, onChangeInput }) => {
+  const key = title.toLowerCase().replaceAll(' ', '-')
   return (
     <div className="sm:col-span-6">
       <label className="block text-sm font-medium text-gray-700">
@@ -27,11 +29,11 @@ const UploadFile: React.FC<UploadFileProps> = ({ title, subtitle, hint, uploadHi
         <div className="space-y-1 text-center">
           <div className="flex text-sm text-gray-600">
             <label
-              htmlFor="file-upload"
+              htmlFor={`file-upload-${key}`}
               className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
             >
               <span>Upload a file</span>
-              <input id="file-upload" name="file-upload" type="file" className="sr-only" />
+              <input id={`file-upload-${key}`} name={`file-upload-${key}`} type="file" className="sr-only" onChange={onChangeInput} />
             </label>
             <p className="pl-1">or drag and drop</p>
           </div>
