@@ -33,7 +33,10 @@ const loadFromStorage = () => {
   let config: UserConfiguration = defaultConfiguration
 
   try {
-    config = JSON.parse(localStorage.getItem('userConfig') || '')
+    const configString = localStorage.getItem('userConfig')
+    if (configString) {
+      config = JSON.parse(configString)
+    }
   } catch (error) {
     console.error(error)
   }
