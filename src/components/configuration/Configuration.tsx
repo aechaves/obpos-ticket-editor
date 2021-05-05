@@ -14,9 +14,9 @@ const Configuration: React.FC<ConfigurationProps> = ({ open, onDismiss }) => {
   const cancelButtonRef = useRef(null)
   const { configuration, dispatchUserConfiguration } = useContext(userContext)
 
-  const loadLabels = (file: string) => {
+  const loadLabels = (fileName: string, contents: string) => {
     const parser = new DOMParser();
-    const xmlLabels = parser.parseFromString(file, 'application/xml');
+    const xmlLabels = parser.parseFromString(contents, 'application/xml');
     const labels: Map<string, string> = new Map()
     if (xmlLabels.documentElement.nodeName == 'parseerror') {
       // TODO, show message to the user and do not load the file.
@@ -28,6 +28,7 @@ const Configuration: React.FC<ConfigurationProps> = ({ open, onDismiss }) => {
         labels.set(messageLabel, messageContent)
       }
       dispatchUserConfiguration({ property: 'messageLabels', value: labels })
+      dispatchUserConfiguration({ property: 'messageFilename', value: fileName })
     }
   }
   // TODO preserve the loaded file name and show it, in UploadFile component
@@ -125,6 +126,7 @@ const Configuration: React.FC<ConfigurationProps> = ({ open, onDismiss }) => {
                               subtitle="Upload Openbravo' s WebPOS label strings."
                               hint='(org.openbravo.retail.posterminal)'
                               uploadHint='AD_MESSAGE.XML'
+                              fileName={configuration.messageFilename}
                               onLoadFile={loadLabels}
                             />
                             {/* Translation Labels */}

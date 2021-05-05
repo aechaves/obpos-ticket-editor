@@ -5,7 +5,8 @@ export type UploadFileProps = {
   subtitle?: string
   hint?: string
   uploadHint?: string
-  onLoadFile?: (file: string) => void
+  fileName?: string
+  onLoadFile?: (fileName: string, contents: string) => void
   onRemoveFile?: () => void
 }
 
@@ -15,10 +16,9 @@ const STATUS = {
   loaded: 'loaded'
 }
 
-const UploadFile: React.FC<UploadFileProps> = ({ title, subtitle, hint, uploadHint, onLoadFile, onRemoveFile }) => {
+const UploadFile: React.FC<UploadFileProps> = ({ title, subtitle, hint, uploadHint, fileName, onLoadFile, onRemoveFile }) => {
   const key = title.toLowerCase().replaceAll(' ', '-')
-  const [status, setStatus] = useState(STATUS.initial)
-  const [fileName, setFileName] = useState('')
+  const [status, setStatus] = useState(fileName ? STATUS.loaded : STATUS.initial)
 
   const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.item(0)
@@ -28,15 +28,13 @@ const UploadFile: React.FC<UploadFileProps> = ({ title, subtitle, hint, uploadHi
       file
         .text()
         .then(text => {
-          onLoadFile(text)
+          onLoadFile(file.name, text)
           setStatus(STATUS.loaded)
-          setFileName(file.name)
         })
     }
   }
 
   const removeFile = () => {
-    setFileName('')
     setStatus(STATUS.initial)
     if (onRemoveFile) {
       onRemoveFile()
