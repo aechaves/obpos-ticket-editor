@@ -26,7 +26,7 @@ type UserContext = {
 const defaultConfiguration: UserConfiguration = {
   messageLabels: {},
   translationLabels: {},
-  ticketData: null,
+  ticketData: {},
   monacoThemeLight: false,
   monacoMinimap: true,
   monacoLineNumbers: true,

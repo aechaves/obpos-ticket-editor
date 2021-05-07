@@ -31,7 +31,19 @@ const Configuration: React.FC<ConfigurationProps> = ({ open, onDismiss }) => {
       dispatchUserConfiguration({ property: 'messageFilename', value: fileName })
     }
   }
-  // TODO preserve the loaded file name and show it, in UploadFile component
+
+  const loadData = (fileName: string, contents: string) => {
+    let ticketData = {}
+    try {
+      ticketData = JSON.parse(contents)
+    } catch (error) {
+      // TODO, show message to the user and do not load the file.
+      console.error('error while parsing your ticket data. Is your JSON file well formed?')
+    }
+
+    dispatchUserConfiguration({ property: 'ticketData', value: ticketData })
+    dispatchUserConfiguration({ property: 'ticketDataFilename', value: fileName })
+  }
 
   return (
     <Transition.Root show={!!open} as={Fragment}>
@@ -140,6 +152,8 @@ const Configuration: React.FC<ConfigurationProps> = ({ open, onDismiss }) => {
                             <UploadFile
                               title='Ticket Data'
                               subtitle="Upload the ticket's data as a JSON file."
+                              fileName={configuration.ticketDataFilename}
+                              onLoadFile={loadData}
                             />
                           </div>
                         </div>

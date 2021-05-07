@@ -23,20 +23,20 @@ const OB = {
 
       return label;
     },
-    formatDate: (date: Date | string) => {
+    formatDate: (date?: Date | string) => {
       if (typeof date === 'string') {
         return date
       }
-      return date.toISOString() //TODO formatting?
+      return date?.toISOString() //TODO formatting?
     },
-    formatHour: (date: Date | string) => {
+    formatHour: (date?: Date | string) => {
       if (typeof date === 'string') {
         return date
       }
-      return date.toISOString() //TODO formatting
+      return date?.toISOString() //TODO formatting
     },
-    formatRate: (rate: number) => {
-      return rate.toString() // TODO formatting
+    formatRate: (rate?: number) => {
+      return rate?.toString() // TODO formatting
     }
   },
   App: {

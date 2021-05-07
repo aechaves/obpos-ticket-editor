@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import JsxParser from 'react-jsx-parser'
 import { template as compile } from 'underscore'
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import ReactPanZoom from "@ajainarayanan/react-pan-zoom";
 import { barcode, display, image, line, output, text, ticket } from './ticket'
 import OB from '../helpers/OB'
-import { data as ticketExamples } from '../ticket-examples/ticket_example_1.json'
 import PreviewController from './PreviewController';
 import PreviewError from './PreviewError';
+import { userContext } from '../helpers/userContext';
 
 interface PreviewProps {
   value: string
@@ -28,11 +27,26 @@ export default class Preview extends Component<PreviewProps, PreviewState> {
     }
   }
 
-  compileTemplate(_template: string): string {
-    let template = _template.replace('<?xml version="1.0" encoding="UTF-8"?>', '')
-    let compiledTemplate = compile(template)
+  compileTemplate = (_template: string): string => {
+    let result = ''
+    try {
+      // The first replace removes the comments, and then the other removes the xml header
+      let template = _template.replace(/<!--[\s\S]*?-->/g, '').replace(/<\?[\s\S]*?\?>/, '')
+      let compiledTemplate = compile(template)
 
-    let result = compiledTemplate({ name: 'test', OB, ticket: ticketExamples[0] })
+      const ticketData = this.context.configuration.ticketData
+      let ticket
+      if (ticketData && ticketData.data) {
+        ticket = ticketData.data.length > 0 ? ticketData.data[0] : ticketData.data
+      } else {
+        ticket = ticketData
+      }
+
+      result = compiledTemplate({ OB, ticket })
+    } catch (error) {
+      // TODO show error to the user
+      console.error(error)
+    }
 
     return result
   }
@@ -90,3 +104,5 @@ export default class Preview extends Component<PreviewProps, PreviewState> {
     )
   }
 }
+
+Preview.contextType = userContext
