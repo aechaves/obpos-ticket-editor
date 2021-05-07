@@ -17,7 +17,7 @@ const Configuration: React.FC<ConfigurationProps> = ({ open, onDismiss }) => {
   const loadLabels = (fileName: string, contents: string) => {
     const parser = new DOMParser();
     const xmlLabels = parser.parseFromString(contents, 'application/xml');
-    const labels: Map<string, string> = new Map()
+    const labels: Record<string, string> = {}
     if (xmlLabels.documentElement.nodeName == 'parseerror') {
       // TODO, show message to the user and do not load the file.
       console.error('error while parsing message labels. Is your XML file well formed?')
@@ -25,7 +25,7 @@ const Configuration: React.FC<ConfigurationProps> = ({ open, onDismiss }) => {
       for (const xmlLabel of xmlLabels.getElementsByTagName('AD_MESSAGE')) {
         const messageLabel = xmlLabel.getElementsByTagName('VALUE')[0].textContent || ''
         const messageContent = xmlLabel.getElementsByTagName('MSGTEXT')[0].textContent || ''
-        labels.set(messageLabel, messageContent)
+        labels[messageLabel] = messageContent
       }
       dispatchUserConfiguration({ property: 'messageLabels', value: labels })
       dispatchUserConfiguration({ property: 'messageFilename', value: fileName })

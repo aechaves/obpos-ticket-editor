@@ -1,8 +1,8 @@
 import React from 'react'
 
 export type UserConfiguration = {
-  messageLabels: Map<string, string>
-  translationLabels: Map<string, string>
+  messageLabels: Record<string, string>
+  translationLabels: Record<string, string>
   ticketData: any
   translationFilename?: string
   messageFilename?: string
@@ -10,7 +10,7 @@ export type UserConfiguration = {
   monacoThemeLight: boolean
   monacoMinimap: boolean
   monacoLineNumbers: boolean
-  [key: string]: boolean | Map<string, string> | any
+  [key: string]: boolean | Record<string, string> | any
 }
 
 export type ConfigurationDispatch = {
@@ -24,8 +24,8 @@ type UserContext = {
 }
 
 const defaultConfiguration: UserConfiguration = {
-  messageLabels: new Map(),
-  translationLabels: new Map(),
+  messageLabels: {},
+  translationLabels: {},
   ticketData: null,
   monacoThemeLight: false,
   monacoMinimap: true,
