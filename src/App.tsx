@@ -2,14 +2,14 @@ import React, { useReducer, useState } from 'react'
 import Preview from './components/Preview'
 import Sidebar from './components/sidebar/Sidebar'
 import SidebarButton from './components/sidebar/SidebarButton'
-import { data as ticketStructure } from './ticket-examples/ticket_structure_example.json'
+import { example, tutorial } from './ticket-examples/ticket_structure_example.json'
 import Editor from '@monaco-editor/react'
 import Configuration from './components/configuration/Configuration'
 import { DocumentTextIcon, CogIcon } from '@heroicons/react/solid'
 import { UserConfiguration, ConfigurationDispatch, userContext, defaultConfiguration, loadFromStorage, saveToStorage } from './helpers/userContext';
 
 function App() {
-  const [editorText, setEditorText] = useState('')
+  const [editorText, setEditorText] = useState(tutorial)
   const [showConfigModal, setShowConfigModal] = useState(false)
 
   const updateConfiguration = (previous: UserConfiguration, action: ConfigurationDispatch) => {
@@ -23,7 +23,7 @@ function App() {
   }
 
   const loadExample = () => {
-    setEditorText(ticketStructure)
+    setEditorText(example)
   }
 
   const showConfiguration = () => {
