@@ -27,6 +27,12 @@ export default class Preview extends Component<PreviewProps, PreviewState> {
     }
   }
 
+  componentDidUpdate(previousProps: PreviewProps) {
+    if (previousProps.value != this.props.value) {
+      this.setState({ error: undefined })
+    }
+  }
+
   compileTemplate = (_template: string): string => {
     let result = ''
     try {
