@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, DragEvent } from 'react'
 
 export type UploadFileProps = {
   title: string
@@ -21,7 +21,10 @@ const UploadFile: React.FC<UploadFileProps> = ({ title, subtitle, hint, uploadHi
   const [status, setStatus] = useState(fileName ? STATUS.loaded : STATUS.initial)
 
   const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.item(0)
+    loadFile(event.target.files?.item(0))
+  }
+
+  const loadFile = (file?: File | null) => {
     if (file && onLoadFile) {
       setStatus(STATUS.loading)
 
@@ -41,6 +44,11 @@ const UploadFile: React.FC<UploadFileProps> = ({ title, subtitle, hint, uploadHi
     }
   }
 
+  const onDrop = (event: DragEvent<HTMLDivElement>) => {
+    event.preventDefault()
+    loadFile(event.dataTransfer.files?.item(0))
+  }
+
   return (
     <div className="sm:col-span-6">
       <label className="block text-sm font-medium text-gray-700">
@@ -56,7 +64,7 @@ const UploadFile: React.FC<UploadFileProps> = ({ title, subtitle, hint, uploadHi
           {hint}
         </p>
       }
-      <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+      <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md" onDragOver={(e) => e.preventDefault()} onDrop={onDrop}>
         {
           status === STATUS.loading &&
           <div className="space-y-1 text-center">
