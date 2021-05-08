@@ -101,12 +101,12 @@ const UploadFile: React.FC<UploadFileProps> = ({ title, subtitle, hint, uploadHi
             <div className="flex text-sm text-gray-600">
               <span className="pl-1 font-medium">{fileName}</span>
             </div>
-            <a
+            <button
               onClick={removeFile}
               className="relative cursor-pointer bg-white text-sm rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
             >
               Remove
-              </a>
+              </button>
           </div>
         }
       </div>
