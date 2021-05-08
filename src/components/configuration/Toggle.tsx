@@ -1,18 +1,19 @@
 import { Switch } from '@headlessui/react'
-import React from 'react'
+import React, { LegacyRef } from 'react'
 
 export type ToggleProps = {
   label: string
   description?: string
   enabled: boolean
   onChange: (checked: boolean) => void
+  ref?: LegacyRef<HTMLButtonElement>
 }
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-const Toggle: React.FC<ToggleProps> = ({ label, description, enabled, onChange }) => {
+const Toggle: React.FC<ToggleProps> = ({ ref, label, description, enabled, onChange }) => {
   return (
     <Switch.Group as="div" className="flex items-center justify-between">
       <Switch.Label as="span" className="flex flex-col" passive>
@@ -20,6 +21,7 @@ const Toggle: React.FC<ToggleProps> = ({ label, description, enabled, onChange }
         <span className="text-sm text-gray-500">{description}</span>
       </Switch.Label>
       <Switch
+        ref={ref}
         checked={enabled}
         onChange={onChange}
         className={classNames(
