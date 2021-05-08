@@ -9,7 +9,8 @@ import { DocumentTextIcon, CogIcon } from '@heroicons/react/solid'
 import { UserConfiguration, ConfigurationDispatch, userContext, defaultConfiguration, loadFromStorage, saveToStorage } from './helpers/userContext';
 
 function App() {
-  const [editorText, setEditorText] = useState(tutorial)
+  const previousText = localStorage.getItem('editorText')
+  const [editorText, setEditorText] = useState(previousText || tutorial)
   const [showConfigModal, setShowConfigModal] = useState(false)
 
   const updateConfiguration = (previous: UserConfiguration, action: ConfigurationDispatch) => {
@@ -20,10 +21,15 @@ function App() {
 
   const onChangeEditorText = (value: string | undefined) => {
     setEditorText(value || '')
+    localStorage.setItem('editorText', value || '')
   }
 
   const loadExample = () => {
     setEditorText(example)
+  }
+
+  const loadTutorial = () => {
+    setEditorText(tutorial)
   }
 
   const showConfiguration = () => {
@@ -39,14 +45,20 @@ function App() {
     <userContext.Provider value={{ configuration: userConfiguration, dispatchUserConfiguration }}>
       <div className='flex justify-between items-stretch'>
         <Sidebar>
+          <SidebarButton onClick={showConfiguration} label='Configuration'>
+            <CogIcon
+              className='text-gray-400 group-hover:text-gray-300 mr-3 h-6 w-6'
+              aria-hidden="true"
+            />
+          </SidebarButton>
           <SidebarButton onClick={loadExample} label='Load Example'>
             <DocumentTextIcon
               className='text-gray-400 group-hover:text-gray-300 mr-3 h-6 w-6'
               aria-hidden="true"
             />
           </SidebarButton>
-          <SidebarButton onClick={showConfiguration} label='Configuration'>
-            <CogIcon
+          <SidebarButton onClick={loadTutorial} label='Load Tutorial'>
+            <DocumentTextIcon
               className='text-gray-400 group-hover:text-gray-300 mr-3 h-6 w-6'
               aria-hidden="true"
             />
