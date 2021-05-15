@@ -3,7 +3,7 @@ import JsxParser from 'react-jsx-parser'
 import _, { template as compile } from 'underscore'
 import ReactPanZoom from "@ajainarayanan/react-pan-zoom";
 import { barcode, display, image, line, output, text, ticket } from './ticket'
-import OB from '../helpers/OB'
+import Utilities from '../helpers/Utilities'
 import PreviewController from './PreviewController';
 import PreviewError from './PreviewError';
 import { userContext } from '../helpers/userContext';

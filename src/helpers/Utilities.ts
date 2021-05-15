@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import Order, { OrderLine } from './Order';
 import { loadFromStorage } from './userContext';
 
-const OB = {
+const Utilities = {
   Constants: {
     FIELDSEPARATOR: '$',
     IDENTIFIER: '_identifier'
@@ -106,7 +106,7 @@ const OB = {
         return line.printTotalLine()
       },
       getChangeLabelFromTicket: (ticket: any) => {
-        return OB.UTIL.getChangeLabelFromReceipt(ticket)
+        return Utilities.UTIL.getChangeLabelFromReceipt(ticket)
       }
     },
     TerminalProperty: {
@@ -127,4 +127,4 @@ const OB = {
   }
 }
 
-export default OB
+export default Utilities

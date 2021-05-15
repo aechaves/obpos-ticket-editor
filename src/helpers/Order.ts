@@ -1,4 +1,4 @@
-import OB from './OB'
+import Utilities from './Utilities'
 
 export default class Order {
   [property: string]: any
@@ -39,7 +39,7 @@ export default class Order {
   }
 
   printGross() {
-    OB.I18N.formatCurrency(this.getGross())
+    Utilities.I18N.formatCurrency(this.getGross())
   }
 
   getScannableDocumentNo() {
@@ -132,23 +132,23 @@ export class OrderLine extends BaseObject {
   }
 
   printPrice() {
-    return OB.I18N.formatCurrency(this.getPrice());
+    return Utilities.I18N.formatCurrency(this.getPrice());
   }
 
   printGross() {
-    return OB.I18N.formatCurrency(this.get('_gross') || this.get('gross'));
+    return Utilities.I18N.formatCurrency(this.get('_gross') || this.get('gross'));
   }
 
   printNet() {
-    return OB.I18N.formatCurrency(this.get('net'));
+    return Utilities.I18N.formatCurrency(this.get('net'));
   }
 
   printDiscount() {
-    return OB.I18N.formatCurrency(this.getDiscountAmount());
+    return Utilities.I18N.formatCurrency(this.getDiscountAmount());
   }
 
   printTotalLine() {
-    return OB.I18N.formatCurrency((this.getPrice() * this.get('qty')) - this.getDiscountAmount());
+    return Utilities.I18N.formatCurrency((this.getPrice() * this.get('qty')) - this.getDiscountAmount());
   }
 }
 
