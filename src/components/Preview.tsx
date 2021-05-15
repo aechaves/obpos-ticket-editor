@@ -30,18 +30,26 @@ export default class Preview extends Component<PreviewProps, PreviewState> {
     }
   }
 
+  updatePreview = () => {
+    let capturedError = undefined
+    let compiledTemplate = this.state.compiledTemplate
+    try {
+      compiledTemplate = this.compileTemplate(this.props.value)
+    } catch (error) {
+      capturedError = error
+      console.error(error)
+    }
+
+    this.setState({ error: capturedError, compiledTemplate })
+  }
+
+  componentDidMount() {
+    this.updatePreview()
+  }
+
   componentDidUpdate(previousProps: PreviewProps) {
     if (previousProps.value != this.props.value) {
-      let capturedError = undefined
-      let compiledTemplate = this.state.compiledTemplate
-      try {
-        compiledTemplate = this.compileTemplate(this.props.value)
-      } catch (error) {
-        capturedError = error
-        console.error(error)
-      }
-
-      this.setState({ error: capturedError, compiledTemplate })
+      this.updatePreview()
     }
   }
 
@@ -60,7 +68,7 @@ export default class Preview extends Component<PreviewProps, PreviewState> {
     }
 
     const order = new Order(ticket)
-    result = compiledTemplate({ OB, ticket: order, order, _ })
+    result = compiledTemplate({ OB: Utilities, ticket: order, order, _ })
 
     return result
   }
