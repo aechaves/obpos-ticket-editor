@@ -2,7 +2,7 @@ import React, { useReducer, useState } from 'react'
 import Preview from './components/Preview'
 import Sidebar from './components/sidebar/Sidebar'
 import SidebarButton from './components/sidebar/SidebarButton'
-import { example, tutorial } from './ticket-examples/ticket_structure_example.json'
+import { tutorial } from './ticket-examples/ticket_structure_example.json'
 import Editor from '@monaco-editor/react'
 import Configuration from './components/configuration/Configuration'
 import { DocumentTextIcon, CogIcon } from '@heroicons/react/solid'
@@ -24,10 +24,6 @@ function App() {
     localStorage.setItem('editorText', value || '')
   }
 
-  const loadExample = () => {
-    setEditorText(example)
-  }
-
   const loadTutorial = () => {
     setEditorText(tutorial)
   }
@@ -47,12 +43,6 @@ function App() {
         <Sidebar>
           <SidebarButton onClick={showConfiguration} label='Configuration'>
             <CogIcon
-              className='text-gray-400 group-hover:text-gray-300 mr-3 h-6 w-6'
-              aria-hidden="true"
-            />
-          </SidebarButton>
-          <SidebarButton onClick={loadExample} label='Load Example'>
-            <DocumentTextIcon
               className='text-gray-400 group-hover:text-gray-300 mr-3 h-6 w-6'
               aria-hidden="true"
             />
