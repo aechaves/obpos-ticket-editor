@@ -1,7 +1,7 @@
 import React, { useReducer, useState } from 'react'
 import Preview from './components/Preview'
-import Sidebar from './components/sidebar/Sidebar'
-import SidebarButton from './components/sidebar/SidebarButton'
+import Topbar from './components/sidebar/Topbar'
+import TopbarButton from './components/sidebar/TopbarButton'
 import { tutorial } from './ticket-examples/ticket_structure_example.json'
 import Editor from '@monaco-editor/react'
 import Configuration from './components/configuration/Configuration'
@@ -39,21 +39,21 @@ function App() {
 
   return (
     <userContext.Provider value={{ configuration: userConfiguration, dispatchUserConfiguration }}>
+      <Topbar>
+        <TopbarButton onClick={showConfiguration} label='Configuration'>
+          <CogIcon
+            className='text-gray-400 group-hover:text-gray-300 mr-3 h-6 w-6'
+            aria-hidden="true"
+          />
+        </TopbarButton>
+        <TopbarButton onClick={loadTutorial} label='Load Tutorial'>
+          <DocumentTextIcon
+            className='text-gray-400 group-hover:text-gray-300 mr-3 h-6 w-6'
+            aria-hidden="true"
+          />
+        </TopbarButton>
+      </Topbar>
       <div className='flex justify-between items-stretch'>
-        <Sidebar>
-          <SidebarButton onClick={showConfiguration} label='Configuration'>
-            <CogIcon
-              className='text-gray-400 group-hover:text-gray-300 mr-3 h-6 w-6'
-              aria-hidden="true"
-            />
-          </SidebarButton>
-          <SidebarButton onClick={loadTutorial} label='Load Tutorial'>
-            <DocumentTextIcon
-              className='text-gray-400 group-hover:text-gray-300 mr-3 h-6 w-6'
-              aria-hidden="true"
-            />
-          </SidebarButton>
-        </Sidebar>
         <Editor
           className='flex flex-grow h-screen w-1/2 print:hidden'
           defaultLanguage='xml'

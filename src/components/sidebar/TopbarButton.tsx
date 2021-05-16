@@ -1,11 +1,11 @@
 import React from 'react'
 
-export type SidebarButtonProps = {
+export type TopbarButtonProps = {
   onClick: () => void
   label: string
 }
 
-const SidebarButton: React.FC<SidebarButtonProps> = ({ label, onClick, children }) => {
+const TopbarButton: React.FC<TopbarButtonProps> = ({ label, onClick, children }) => {
   return (
     <button
       onClick={onClick}
@@ -17,4 +17,4 @@ const SidebarButton: React.FC<SidebarButtonProps> = ({ label, onClick, children 
   )
 }
 
-export default SidebarButton
+export default TopbarButton
