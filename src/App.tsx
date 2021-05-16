@@ -5,7 +5,7 @@ import TopbarButton from './components/sidebar/TopbarButton'
 import { tutorial } from './ticket-examples/ticket_structure_example.json'
 import Editor from '@monaco-editor/react'
 import Configuration from './components/configuration/Configuration'
-import { DocumentTextIcon, CogIcon } from '@heroicons/react/solid'
+import { DocumentTextIcon, CogIcon, ExclamationCircleIcon } from '@heroicons/react/solid'
 import { UserConfiguration, ConfigurationDispatch, userContext, defaultConfiguration, loadFromStorage, saveToStorage } from './helpers/userContext';
 
 function App() {
@@ -50,6 +50,18 @@ function App() {
           <TopbarButton onClick={loadTutorial} label='Load Tutorial'>
             <DocumentTextIcon
               className='text-gray-400 group-hover:text-gray-300 mr-3 h-6 w-6'
+              aria-hidden="true"
+            />
+          </TopbarButton>
+          <div className='flex flex-grow'>
+            {/* Spacer */}
+          </div>
+          <TopbarButton
+            link
+            href={'https://github.com/aechaves/obpos-ticket-editor/issues'}
+          >
+            <ExclamationCircleIcon
+              className='text-gray-400 group-hover:text-gray-300 h-6 w-6'
               aria-hidden="true"
             />
           </TopbarButton>
