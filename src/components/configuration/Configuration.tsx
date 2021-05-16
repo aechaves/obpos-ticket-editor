@@ -143,12 +143,14 @@ const Configuration: React.FC<ConfigurationProps> = ({ open, onDismiss }) => {
                               onLoadFile={loadLabels}
                             />
                             {/* Translation Labels */}
-                            <UploadFile
-                              title='Message Translations'
-                              subtitle="Upload Openbravo's WebPOS translation strings."
-                              hint='(org.openbravo.retail.posterminal.lang_LANG)'
-                              uploadHint='AD_MESSAGE_TRL.xml'
-                            />
+                            <div className='hidden'>
+                              <UploadFile
+                                title='Message Translations'
+                                subtitle="Upload Openbravo's WebPOS translation strings."
+                                hint='(org.openbravo.retail.posterminal.lang_LANG)'
+                                uploadHint='AD_MESSAGE_TRL.xml'
+                              />
+                            </div>
                             {/* Ticket sample JSON */}
                             <UploadFile
                               title='Ticket Data'
