@@ -2,7 +2,6 @@ import Utilities from './Utilities'
 
 export default class Order {
   [property: string]: any
-  lines?: Collection<OrderLine>
 
   constructor(object: any) {
     const order = object
