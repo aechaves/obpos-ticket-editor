@@ -39,36 +39,39 @@ function App() {
 
   return (
     <userContext.Provider value={{ configuration: userConfiguration, dispatchUserConfiguration }}>
-      <Topbar>
-        <TopbarButton onClick={showConfiguration} label='Configuration'>
-          <CogIcon
-            className='text-gray-400 group-hover:text-gray-300 mr-3 h-6 w-6'
-            aria-hidden="true"
-          />
-        </TopbarButton>
-        <TopbarButton onClick={loadTutorial} label='Load Tutorial'>
-          <DocumentTextIcon
-            className='text-gray-400 group-hover:text-gray-300 mr-3 h-6 w-6'
-            aria-hidden="true"
-          />
-        </TopbarButton>
-      </Topbar>
-      <div className='flex justify-between items-stretch'>
-        <Editor
-          className='flex flex-grow h-screen w-1/2 print:hidden'
-          defaultLanguage='xml'
-          theme={userConfiguration.monacoThemeLight ? 'light' : 'vs-dark'}
-          options={{
-            minimap: {
-              enabled: userConfiguration.monacoMinimap,
-            },
-            lineNumbers: userConfiguration.monacoLineNumbers,
-          }}
-          value={editorText}
-          onChange={onChangeEditorText}
-        />
-        <Preview className='flex flex-grow justify-center h-screen w-1/2' value={editorText} />
-        <Configuration open={showConfigModal} onDismiss={saveConfig} />
+      <div className='flex flex-col h-screen'>
+        <Topbar>
+          <TopbarButton onClick={showConfiguration} label='Configuration'>
+            <CogIcon
+              className='text-gray-400 group-hover:text-gray-300 mr-3 h-6 w-6'
+              aria-hidden="true"
+            />
+          </TopbarButton>
+          <TopbarButton onClick={loadTutorial} label='Load Tutorial'>
+            <DocumentTextIcon
+              className='text-gray-400 group-hover:text-gray-300 mr-3 h-6 w-6'
+              aria-hidden="true"
+            />
+          </TopbarButton>
+        </Topbar>
+        <div className='flex flex-grow justify-between items-stretch overflow-scroll'>
+          <div className='flex flex-grow print:hidden'>
+            <Editor
+              defaultLanguage='xml'
+              theme={userConfiguration.monacoThemeLight ? 'light' : 'vs-dark'}
+              options={{
+                minimap: {
+                  enabled: userConfiguration.monacoMinimap,
+                },
+                lineNumbers: userConfiguration.monacoLineNumbers,
+              }}
+              value={editorText}
+              onChange={onChangeEditorText}
+            />
+          </div>
+          <Preview className='flex justify-center w-1/4' value={editorText} />
+          <Configuration open={showConfigModal} onDismiss={saveConfig} />
+        </div>
       </div>
     </userContext.Provider>
   )
