@@ -75,7 +75,7 @@ function App() {
                 minimap: {
                   enabled: userConfiguration.monacoMinimap,
                 },
-                lineNumbers: userConfiguration.monacoLineNumbers,
+                lineNumbers: userConfiguration.monacoLineNumbers ? 'on' : 'off',
               }}
               value={editorText}
               onChange={onChangeEditorText}
