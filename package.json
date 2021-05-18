@@ -1,7 +1,7 @@
 {
   "name": "obpos-ticket-editor",
   "version": "1.0.0",
-  "license": "Apache 2.0 with Commons Clause",
+  "license": "Apache-2.0 WITH Commons-clause-1.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
